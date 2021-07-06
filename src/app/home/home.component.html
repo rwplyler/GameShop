@@ -1,1 +1,10 @@
 <p>home works!</p>
+
+<h1>Welcome to GameShop</h1>
+<h6>Locations</h6>
+
+<div *ngIf="stores">
+    <li *ngFor="let stor of stores">
+        <a>{{stor.storeName}}</a>
+        </li>
+</div>

@@ -1,0 +1,7 @@
+<p>customers works!</p>
+
+<div *ngIf="allcustomers">
+    <li *ngFor="let cust of allcustomers">
+    <a>{{cust.id}}: {{cust.fname}} {{cust.lname}}</a>
+    </li>
+</div>

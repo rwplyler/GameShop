@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 namespace GameShopAPI.Controllers
 {
   [ApiController]
-  [Route("[controller]")]
   public class StoreController : Controller
    {
     public IStoreData Context;
@@ -19,7 +18,7 @@ namespace GameShopAPI.Controllers
     }
 
     [HttpGet]
-    [Route("/all")]
+    [Route("[controller]")]
     public IActionResult GetStores()
     {
       return Ok(Context.GetAllStores());

@@ -17,7 +17,8 @@ namespace GameShopAPI
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+          readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+    public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
         }
@@ -28,7 +29,16 @@ namespace GameShopAPI
         public void ConfigureServices(IServiceCollection services)
         {
 
-            services.AddControllers();
+          services.AddCors(options =>
+            {
+              options.AddPolicy(name: MyAllowSpecificOrigins,
+                          builder =>
+                          {
+                            builder.WithOrigins("http://localhost:4200");
+                          });
+         });
+
+      services.AddControllers();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "GameShopAPI", Version = "v1" });
@@ -52,6 +62,8 @@ namespace GameShopAPI
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseCors(MyAllowSpecificOrigins);
 
             app.UseAuthorization();
 
